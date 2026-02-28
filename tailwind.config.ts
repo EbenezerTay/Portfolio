@@ -42,8 +42,8 @@ const config: Config = {
           "50%": { transform: "translate3d(0, -12px, 0)" },
         },
         pulseSoft: {
-          "0%, 100%": { opacity: 0.4, transform: "scale(1)" },
-          "50%": { opacity: 0.9, transform: "scale(1.04)" },
+          "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
+          "50%": { opacity: "0.9", transform: "scale(1.04)" },
         },
         particleOrbit: {
           "0%": { transform: "rotate(0deg) translateX(12px) rotate(0deg)" },

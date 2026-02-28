@@ -9,6 +9,18 @@ type ChatMessage = {
   content: string;
 };
 
+// Web Speech API event types (not in default TypeScript DOM lib)
+interface SpeechRecognitionResultList {
+  length: number;
+  [index: number]: { length: number; [index: number]: { transcript: string } };
+}
+interface SpeechRecognitionEventType {
+  results: SpeechRecognitionResultList;
+}
+interface SpeechRecognitionErrorEventType {
+  error: string;
+}
+
 const SpeechRecognition =
   typeof window !== "undefined"
     ? // @ts-expect-error: Web Speech API types are available at runtime in supported browsers
@@ -36,7 +48,7 @@ export function AboutMeChat() {
     rec.continuous = true;
     rec.interimResults = true;
     rec.lang = "en-SG";
-    rec.onresult = (event: SpeechRecognitionEvent) => {
+    rec.onresult = (event: SpeechRecognitionEventType) => {
       let combined = "";
       for (let i = 0; i < event.results.length; i++) {
         combined += event.results[i][0].transcript + " ";
@@ -45,7 +57,7 @@ export function AboutMeChat() {
       const base = prefix ? prefix + " " : "";
       setInput(base + combined.trim());
     };
-    rec.onerror = (event: SpeechRecognitionErrorEvent) => {
+    rec.onerror = (event: SpeechRecognitionErrorEventType) => {
       if (event.error !== "aborted") setVoiceError("Voice input failed. Try again.");
       setIsListening(false);
     };

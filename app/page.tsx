@@ -21,7 +21,7 @@ const DynamicCertificates = dynamic(
 
 export default function Home() {
   return (
-    <div className="relative space-y-4 pb-12 pt-10">
+    <div className="relative space-y-2 pb-8 pt-4 sm:space-y-4 sm:pb-12 sm:pt-10">
       <HeroSection />
       <AboutSection />
       <ProjectsSection />

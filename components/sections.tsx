@@ -29,7 +29,7 @@ export function HeroSection() {
   return (
     <SectionShell
       id="top"
-      className="relative flex min-h-[80vh] items-center justify-center px-6 pb-20 pt-24 lg:px-16"
+      className="relative flex min-h-[70vh] sm:min-h-[80vh] items-center justify-center px-4 pb-12 pt-20 sm:px-6 sm:pb-20 sm:pt-24 lg:px-16"
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -138,7 +138,7 @@ export function AboutSection() {
   return (
     <SectionShell
       id="about"
-      className="relative mx-auto w-full max-w-6xl px-6 pb-24 pt-10 lg:px-16"
+      className="relative mx-auto w-full max-w-6xl px-6 pb-12 pt-6 md:pb-20 md:pt-8 lg:pb-24 lg:pt-10 lg:px-16"
     >
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.1fr)] lg:items-center">
         <motion.div
@@ -193,7 +193,7 @@ export function ProjectsSection() {
   return (
     <SectionShell
       id="projects"
-      className="relative mx-auto w-full max-w-6xl px-6 pb-24 pt-10 lg:px-16"
+      className="relative mx-auto w-full max-w-6xl px-6 pb-12 pt-6 md:pb-20 md:pt-8 lg:pb-24 lg:pt-10 lg:px-16"
     >
       <motion.div
         className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-ai-accent-soft"
@@ -302,7 +302,7 @@ export function SkillsSection() {
   return (
     <SectionShell
       id="skills"
-      className="relative mx-auto w-full max-w-5xl px-6 pb-24 pt-10 lg:px-16"
+      className="relative mx-auto w-full max-w-5xl px-6 pb-12 pt-6 md:pb-20 md:pt-8 lg:pb-24 lg:pt-10 lg:px-16"
     >
       <motion.div
         className="mx-auto mb-2 text-center text-xs font-medium uppercase tracking-[0.16em] text-ai-accent-soft"
@@ -392,7 +392,7 @@ export function TimelineSection() {
   return (
     <SectionShell
       id="timeline"
-      className="relative mx-auto w-full max-w-5xl px-6 pb-24 pt-10 lg:px-16"
+      className="relative mx-auto w-full max-w-5xl px-6 pb-12 pt-6 md:pb-20 md:pt-8 lg:pb-24 lg:pt-10 lg:px-16"
     >
       <div className="mb-6 space-y-2 text-left">
         <div className="text-xs font-medium uppercase tracking-[0.16em] text-ai-accent-soft">
@@ -402,15 +402,16 @@ export function TimelineSection() {
           Key roles and experiences that shaped how I design, build, and lead.
         </p>
       </div>
-      <div className="relative">
+      <div className="relative pl-0 lg:pl-0">
+        {/* Mobile: line on left. Desktop: line in center */}
         <motion.div
-          className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-ai-accent via-ai-accent-soft/40 to-transparent"
+          className="absolute left-3 top-0 h-full w-px bg-gradient-to-b from-ai-accent via-ai-accent-soft/40 to-transparent lg:left-1/2 lg:-translate-x-1/2"
           initial={{ scaleY: 0 }}
           whileInView={{ scaleY: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1.4, ease: [0.22, 0.61, 0.36, 1] }}
         />
-        <div className="space-y-10">
+        <div className="space-y-6 lg:space-y-10">
           {[
             {
               label: "NUS Innovation x Impact Immersion Programme I3P",
@@ -445,8 +446,8 @@ export function TimelineSection() {
             return (
               <motion.div
                 key={index}
-                className={`group relative flex items-center ${
-                  alignLeft ? "justify-start" : "justify-end"
+                className={`group relative flex items-center justify-start ${
+                  alignLeft ? "" : "lg:justify-end"
                 }`}
                 initial={{ opacity: 0, x: alignLeft ? -40 : 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -457,14 +458,15 @@ export function TimelineSection() {
                   ease: [0.22, 0.61, 0.36, 1],
                 }}
               >
+                {/* Mobile: full width, pl to clear left line. Desktop: max-w-md, alternating padding */}
                 <div
-                  className={`w-full max-w-md ${
-                    alignLeft ? "pr-10" : "pl-10"
+                  className={`w-full pl-10 lg:max-w-md lg:pl-0 ${
+                    alignLeft ? "lg:pr-10" : "lg:pl-10 lg:pr-0"
                   }`}
                 >
                   <div
                     className={`relative rounded-2xl border border-ai-border/70 bg-ai-surface/80 p-4 text-left shadow-ai-soft ${
-                      alignLeft ? "ml-auto" : "mr-auto"
+                      alignLeft ? "lg:ml-auto" : "lg:mr-auto"
                     }`}
                   >
                     <div className="space-y-2">
@@ -482,7 +484,7 @@ export function TimelineSection() {
                       {item.galleryHref && (
                         <Link
                           href={item.galleryHref}
-                          className="mt-2 inline-flex items-center rounded-full bg-ai-accent/80 px-3 py-1 text-[0.7rem] font-medium text-slate-50 opacity-0 shadow-ai-soft transition group-hover:opacity-100"
+                          className="mt-2 inline-flex items-center rounded-full bg-ai-accent/80 px-3 py-1 text-[0.7rem] font-medium text-slate-50 opacity-100 shadow-ai-soft transition sm:opacity-0 sm:group-hover:opacity-100"
                         >
                           See images
                         </Link>
@@ -503,7 +505,7 @@ export function AchievementsSection() {
   return (
     <SectionShell
       id="achievements"
-      className="relative mx-auto w-full max-w-6xl px-6 pb-24 pt-10 lg:px-16"
+      className="relative mx-auto w-full max-w-6xl px-6 pb-12 pt-6 md:pb-20 md:pt-8 lg:pb-24 lg:pt-10 lg:px-16"
     >
       <motion.div
         className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-ai-accent/20 via-transparent to-transparent blur-3xl"
@@ -661,7 +663,7 @@ export function CertificatesSection() {
     <>
       <SectionShell
         id="certificates"
-        className="relative mx-auto w-full max-w-6xl px-0 pb-24 pt-10"
+        className="relative mx-auto w-full max-w-6xl px-0 pb-12 pt-6 md:pb-20 md:pt-8 lg:pb-24 lg:pt-10"
       >
         <motion.div
           className="mx-6 mb-2 text-xs font-medium uppercase tracking-[0.16em] text-ai-accent-soft"
@@ -758,7 +760,7 @@ export function TestimonialsSection() {
   return (
     <SectionShell
       id="testimonials"
-      className="relative mx-auto w-full max-w-4xl px-6 pb-24 pt-10 lg:px-16"
+      className="relative mx-auto w-full max-w-4xl px-6 pb-12 pt-6 md:pb-20 md:pt-8 lg:pb-24 lg:pt-10 lg:px-16"
     >
       <motion.div
         className="mx-auto mb-2 text-center text-xs font-medium uppercase tracking-[0.16em] text-ai-accent-soft"
@@ -809,7 +811,7 @@ export function ContactSection() {
   return (
     <SectionShell
       id="contact"
-      className="relative mx-auto w-full max-w-xl px-6 pb-28 pt-10 lg:px-0"
+      className="relative mx-auto w-full max-w-xl px-4 pb-16 pt-6 md:pb-24 md:pt-8 lg:px-0 lg:pb-28 lg:pt-10"
     >
       <motion.div
         className="mx-auto mb-2 text-center text-xs font-medium uppercase tracking-[0.16em] text-ai-accent-soft"

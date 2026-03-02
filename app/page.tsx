@@ -7,8 +7,6 @@ import {
   TimelineSection,
   AchievementsSection,
   CertificatesSection,
-  TestimonialsSection,
-  ContactSection,
 } from "@/components/sections";
 
 const DynamicCertificates = dynamic(
@@ -29,8 +27,9 @@ export default function Home() {
       <TimelineSection />
       <AchievementsSection />
       <DynamicCertificates />
-      <TestimonialsSection />
-      <ContactSection />
+      <footer className="mt-6 px-6 pt-4 text-center text-[0.7rem] text-slate-400">
+        © 2026 Ebenezer. All Rights Reserved.
+      </footer>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useOverlay } from "@/components/OverlayContext";
 
 /**
  * Customize the right-side nav items here. Add or remove links as needed.
@@ -15,6 +16,7 @@ const NAV_ITEMS = [
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const { isOverlayOpen } = useOverlay();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -24,9 +26,11 @@ export function Navbar() {
 
   return (
     <motion.header
-      className="fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-4"
+      className={`fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-4 ${
+        isOverlayOpen ? "pointer-events-none" : ""
+      }`}
       initial={{ y: -40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      animate={{ y: 0, opacity: isOverlayOpen ? 0 : 1 }}
       transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
     >
       <motion.nav

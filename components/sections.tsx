@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { SectionShell } from "@/components/SectionShell";
+import { useOverlay } from "@/components/OverlayContext";
 
 const fadeStaggerParent: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -653,9 +654,14 @@ export function CertificatesSection() {
       title: "Temasek Foundation SCALE Scholar 2025",
       image: "/tf-scale-2025.png",
     },
+    {
+      title: "Sustainability Hackathon Merit 2026",
+      image: "/sustainability-hackathon-merit-2026.png",
+    },
   ];
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const { setOverlayOpen } = useOverlay();
   const activeCert =
     activeIndex !== null ? certificates[activeIndex] : null;
 
@@ -694,7 +700,10 @@ export function CertificatesSection() {
             <motion.button
               type="button"
               key={item.title}
-              onClick={() => setActiveIndex(index)}
+              onClick={() => {
+                setActiveIndex(index);
+                setOverlayOpen(true);
+              }}
               className="group relative flex h-72 min-w-[300px] flex-col rounded-3xl border border-ai-border/70 bg-ai-surface/80 p-3 text-left shadow-ai-soft outline-none transition hover:border-ai-accent-soft/80 focus-visible:ring-2 focus-visible:ring-ai-accent-soft/70"
               whileHover={{ boxShadow: "0 0 40px rgba(129,140,248,0.45)" }}
               transition={{ duration: 0.3, ease: [0.22, 0.61, 0.36, 1] }}
@@ -722,7 +731,10 @@ export function CertificatesSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={() => setActiveIndex(null)}
+          onClick={() => {
+            setActiveIndex(null);
+            setOverlayOpen(false);
+          }}
         >
           <motion.div
             className="relative max-h-[90vh] max-w-[90vw] overflow-hidden rounded-3xl border border-ai-border/80 bg-ai-surface/95 shadow-ai-strong"
@@ -744,7 +756,10 @@ export function CertificatesSection() {
             </div>
             <button
               type="button"
-              onClick={() => setActiveIndex(null)}
+              onClick={() => {
+                setActiveIndex(null);
+                setOverlayOpen(false);
+              }}
               className="absolute right-4 top-4 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-slate-100 hover:bg-black/90"
             >
               Close
@@ -753,110 +768,5 @@ export function CertificatesSection() {
         </motion.div>
       )}
     </>
-  );
-}
-
-export function TestimonialsSection() {
-  return (
-    <SectionShell
-      id="testimonials"
-      className="relative mx-auto w-full max-w-4xl px-6 pb-12 pt-6 md:pb-20 md:pt-8 lg:pb-24 lg:pt-10 lg:px-16"
-    >
-      <motion.div
-        className="mx-auto mb-2 text-center text-xs font-medium uppercase tracking-[0.16em] text-ai-accent-soft"
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6 }}
-      >
-        Kind words
-      </motion.div>
-      <motion.h2
-        className="mx-auto mb-8 max-w-xl text-center text-lg font-semibold tracking-tight text-slate-50"
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, delay: 0.05 }}
-      >
-        Feedback from teams, clients, and swimmers.
-      </motion.h2>
-      <motion.div
-        className="relative rounded-3xl border border-ai-border/70 bg-ai-surface/85 p-8 shadow-ai-strong"
-        initial={{ opacity: 0, scale: 0.94, y: 10 }}
-        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.35 }}
-        transition={{ duration: 0.9, ease: [0.22, 0.61, 0.36, 1] }}
-      >
-        <motion.div
-          className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-3xl bg-ai-accent-soft/40 blur-2xl"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <div className="relative flex flex-col items-center gap-5">
-          <div className="h-16 w-16 rounded-full bg-slate-200/20" />
-          <div className="space-y-3 text-center">
-            <p className="text-sm leading-relaxed text-slate-200/95">
-              I bring a calm, thoughtful energy to every collaboration. I
-              listen, reframe problems clearly, and turn ideas into interfaces
-              that feel effortless to use.
-            </p>
-          </div>
-        </div>
-      </motion.div>
-    </SectionShell>
-  );
-}
-
-export function ContactSection() {
-  return (
-    <SectionShell
-      id="contact"
-      className="relative mx-auto w-full max-w-xl px-4 pb-16 pt-6 md:pb-24 md:pt-8 lg:px-0 lg:pb-28 lg:pt-10"
-    >
-      <motion.div
-        className="mx-auto mb-2 text-center text-xs font-medium uppercase tracking-[0.16em] text-ai-accent-soft"
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6 }}
-      >
-        Contact
-      </motion.div>
-      <motion.h2
-        className="mx-auto mb-6 max-w-md text-center text-lg font-semibold tracking-tight text-slate-50"
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6, delay: 0.05 }}
-      >
-        Open to collaborations, product conversations, and coaching‑driven work.
-      </motion.h2>
-      <motion.div
-        className="relative rounded-3xl border border-ai-border/70 bg-ai-surface/85 p-8 shadow-ai-soft"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.35 }}
-        transition={{ duration: 0.9, ease: [0.22, 0.61, 0.36, 1] }}
-      >
-        <div className="space-y-4 text-xs text-slate-300">
-          <div className="h-11 w-full rounded-2xl bg-slate-200/10 px-4 py-3 text-[0.75rem] text-slate-400">
-            Name
-          </div>
-          <div className="h-11 w-full rounded-2xl bg-slate-200/10 px-4 py-3 text-[0.75rem] text-slate-400">
-            Email or preferred contact
-          </div>
-          <div className="h-20 w-full rounded-2xl bg-slate-200/10 px-4 py-3 text-[0.75rem] text-slate-400">
-            Short message or project summary
-          </div>
-          <MagneticWrapper className="mt-4">
-            <div className="flex h-12 w-full items-center justify-center rounded-2xl bg-ai-accent/70 shadow-ai-strong">
-              <span className="text-xs font-semibold tracking-wide text-slate-50">
-                Send message
-              </span>
-            </div>
-          </MagneticWrapper>
-        </div>
-      </motion.div>
-    </SectionShell>
   );
 }

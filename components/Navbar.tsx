@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { useOverlay } from "@/components/OverlayContext";
 
 /**
@@ -61,8 +62,14 @@ export function Navbar() {
           href="/"
           className="relative z-10 flex items-center gap-3 transition opacity-90 hover:opacity-100"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-ai-accent/90 shadow-[0_0_20px_rgba(79,70,229,0.4)]">
-            <span className="text-sm font-semibold tracking-widest text-slate-50">ET</span>
+          <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-ai-accent/90 shadow-[0_0_20px_rgba(79,70,229,0.4)]">
+            <Image
+              src="/Ebenezer.png"
+              alt="Ebenezer Tay logo"
+              fill
+              sizes="40px"
+              className="object-cover"
+            />
           </div>
           <div className="hidden flex-col text-xs leading-tight text-slate-300 sm:flex">
             <span className="font-medium text-slate-100">Ebenezer Tay</span>

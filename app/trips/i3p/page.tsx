@@ -23,15 +23,26 @@ export default function I3PTripPage() {
           </p>
         </div>
         <div className="relative lg:w-3/5">
-          <div className="relative h-72 w-full overflow-hidden rounded-3xl border border-ai-border/70 bg-ai-surface/80 shadow-ai-soft">
-            <Image
-              src="/snaprent-switch.png"
-              alt="I3P trip gallery"
-              fill
-              sizes="(min-width: 1024px) 640px, 100vw"
-              className="object-cover"
-              priority
-            />
+          <div className="flex h-80 w-full gap-2">
+            {[
+              { src: "/viet3.png", alt: "I3P trip photo 1" },
+              { src: "/viet2.png", alt: "I3P trip photo 2" },
+              { src: "/viet1.png", alt: "I3P trip photo 3" },
+            ].map((img) => (
+              <div
+                key={img.src}
+                className="relative min-w-0 flex-1 cursor-pointer overflow-hidden rounded-2xl border border-ai-border/70 bg-ai-surface/80 shadow-ai-soft transition-[flex] duration-300 ease-out hover:z-10 hover:flex-[2.5]"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(min-width: 1024px) 640px, 100vw"
+                  className="object-contain object-center"
+                  priority
+                />
+              </div>
+            ))}
           </div>
         </div>
       </SectionShell>

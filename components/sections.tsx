@@ -554,6 +554,27 @@ export function AchievementsSection() {
             logo: "/thrive.png",
           },
           {
+            title: "Featured in School Of Computing",
+            detail:
+              "Trust into income and waste into opportunity.",
+            href: "https://www.sp.edu.sg/courses/schools/sma/happenings/detail/soc-happenings/turning-trust-into-income-and-waste-into-opportunity-through-renting",
+            logo: "/SOC.png",
+          },
+          {
+            title: "Featured in E27",
+            detail:
+              "Backing bold ideas. Singapore Polytechnic funding",
+            href: "https://e27.co/backing-bold-ideas-singapore-polytechnic-funds-16-student-ventures-20250926/",
+            logo: "/E27.png",
+          },
+          {
+            title: "Featured in Green In Future",
+            detail:
+              "The power of AI to drive innovation",
+            href: "https://greeninfuture.com/wp-content/uploads/2025/11/Green-Pulse_Sep-Oct-2025.pdf#page=26",
+            logo: "/GreenInFuture.png",
+          },
+          {
             title: "2024 Batey Hackathon · Gold Winner",
             detail: "Awarded Gold for brand‑driven innovation with SnapRent.",
             logo: "/sp.png",

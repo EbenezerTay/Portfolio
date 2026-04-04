@@ -679,6 +679,10 @@ export function CertificatesSection() {
       title: "Sustainability Hackathon Merit 2026",
       image: "/sustainability-hackathon-merit-2026.png",
     },
+    {
+      title: "Certificate in Entrepreneurship 2026",
+      image: "/certificate-entrepreneurship-sp-2026.png",
+    },
   ];
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);

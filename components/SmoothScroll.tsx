@@ -12,6 +12,8 @@ import "lenis/dist/lenis.css";
 export function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Touch devices have their own momentum scrolling; Lenis only adds work there.
+    if (window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
 
     const lenis = new Lenis({
       duration: 1.15,

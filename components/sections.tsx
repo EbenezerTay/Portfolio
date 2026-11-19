@@ -277,7 +277,7 @@ export function StatementSection() {
 
   return (
     <section ref={ref} className="relative h-[160svh] sm:h-[220vh]">
-      <div className="sticky top-0 flex h-screen items-center">
+      <div className="sticky top-0 flex h-[100svh] items-center">
         <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="mb-6 font-mono text-xs text-ai-accent-soft">
             {"// what i do"}
@@ -465,8 +465,6 @@ export function HeroSection() {
   });
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
-  const heroBlur = useTransform(scrollYProgress, [0.2, 0.8], [0, 6]);
-  const heroFilter = useTransform(heroBlur, (b) => `blur(${b}px)`);
   const windowY = useTransform(scrollYProgress, [0, 1], [0, -90]);
 
   return (
@@ -475,7 +473,7 @@ export function HeroSection() {
         style={
           reduceMotion
             ? undefined
-            : { scale: heroScale, opacity: heroOpacity, filter: heroFilter }
+            : { scale: heroScale, opacity: heroOpacity }
         }
         className="relative mx-auto grid w-full max-w-6xl origin-top items-center gap-4 px-4 pb-6 pt-8 sm:gap-12 sm:px-6 sm:pb-16 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:px-8 lg:pb-24"
       >
@@ -579,7 +577,7 @@ export function HeroSection() {
           {/* Rotating halo behind the robot */}
           <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <div
-              className="aspect-square w-[75%] animate-[spin_30s_linear_infinite] rounded-full opacity-25 blur-3xl motion-reduce:animate-none"
+              className="aspect-square w-[75%] animate-[spin_30s_linear_infinite] rounded-full opacity-25 blur-3xl motion-reduce:animate-none [@media(hover:none)]:animate-none"
               style={{
                 background:
                   "conic-gradient(from 0deg, rgba(52,211,153,0.45), rgba(130,170,255,0.25), transparent 40%, rgba(52,211,153,0.35) 60%, rgba(199,146,234,0.2), rgba(52,211,153,0.45))",

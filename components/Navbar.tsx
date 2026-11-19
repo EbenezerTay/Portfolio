@@ -39,7 +39,7 @@ export function Navbar() {
       <nav
         className={`border-b transition-colors duration-300 ${
           scrolled || open
-            ? "border-ai-border bg-ai-bg/85 backdrop-blur-md"
+            ? "border-ai-border bg-ai-bg/95 [@media(hover:hover)]:bg-ai-bg/85 [@media(hover:hover)]:backdrop-blur-md"
             : "border-transparent bg-transparent"
         }`}
       >

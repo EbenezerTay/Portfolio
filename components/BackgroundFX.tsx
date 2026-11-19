@@ -19,7 +19,7 @@ export function BackgroundFX() {
       />
       {/* Faint top glow */}
       <div
-        className="absolute left-1/2 top-[-18rem] h-[32rem] w-[60rem] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+        className="absolute left-1/2 top-[-18rem] h-[32rem] w-[60rem] -translate-x-1/2 rounded-full opacity-40"
         style={{
           background:
             "radial-gradient(closest-side, rgba(52,211,153,0.18), transparent)",

@@ -519,7 +519,15 @@ function makeGlowTexture() {
   return tex;
 }
 
-function Aura({ shared, accent }: { shared: React.MutableRefObject<Shared>; accent: string }) {
+function Aura({
+  shared,
+  accent,
+  lite,
+}: {
+  shared: React.MutableRefObject<Shared>;
+  accent: string;
+  lite: boolean;
+}) {
   const glowTex = useMemo(makeGlowTexture, []);
   const beamUniforms = useMemo(
     () => ({
@@ -635,7 +643,7 @@ function Aura({ shared, accent }: { shared: React.MutableRefObject<Shared>; acce
         </mesh>
       ))}
 
-      <Sparkles count={22} scale={[4.4, 4.8, 2.4]} position={[0, 2.4, -0.5]} size={1.8} speed={0.2} opacity={0.45} color={accent} />
+      <Sparkles count={lite ? 10 : 22} scale={[4.4, 4.8, 2.4]} position={[0, 2.4, -0.5]} size={1.8} speed={0.2} opacity={0.45} color={accent} />
     </group>
   );
 }
@@ -651,13 +659,15 @@ function RimLight({ shared }: { shared: React.MutableRefObject<Shared> }) {
 type SceneProps = {
   shared: React.MutableRefObject<Shared>;
   accent: string;
+  /** Phones: cheaper shadows, fewer particles */
+  lite: boolean;
   onCoreClick: () => void;
   onCoreHover: (v: boolean) => void;
   onBodyClick: () => void;
   onBodyHover: (v: boolean) => void;
 };
 
-function Scene({ shared, accent, ...handlers }: SceneProps) {
+function Scene({ shared, accent, lite, ...handlers }: SceneProps) {
   return (
     <>
       <ambientLight intensity={0.3} />
@@ -673,8 +683,17 @@ function Scene({ shared, accent, ...handlers }: SceneProps) {
 
       <group position={[0, -2.25, 0]}>
         <RobotModel shared={shared} {...handlers} />
-        <ContactShadows position={[0, 0.01, 0]} scale={4} blur={2.4} far={3} opacity={0.6} resolution={256} color="#000000" />
-        <Aura shared={shared} accent={accent} />
+        <ContactShadows
+          position={[0, 0.01, 0]}
+          scale={4}
+          blur={2.4}
+          far={3}
+          opacity={0.6}
+          resolution={lite ? 128 : 256}
+          frames={lite ? 1 : Infinity}
+          color="#000000"
+        />
+        <Aura shared={shared} accent={accent} lite={lite} />
       </group>
     </>
   );
@@ -900,7 +919,7 @@ function Robot3DInner() {
       {webgl && (
         <Canvas
           frameloop={inView ? "always" : "never"}
-          dpr={[1, 2]}
+          dpr={touch ? [1, 1.5] : [1, 2]}
           camera={{ position: [0, 0.5, 11.8], fov: 30 }}
           gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
           onPointerMissed={() => {
@@ -913,6 +932,7 @@ function Robot3DInner() {
             <Scene
               shared={shared}
               accent={accent}
+              lite={touch}
               onCoreClick={cycleColour}
               onCoreHover={setCoreHover}
               onBodyClick={() => router.push("/ask")}

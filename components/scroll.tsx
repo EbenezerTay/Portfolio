@@ -24,7 +24,7 @@ export const ease = [0.16, 1, 0.3, 1] as const;
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-/** Fades, lifts and un-blurs once when scrolled into view. */
+/** Fades and lifts once when scrolled into view. */
 export function Reveal({
   children,
   delay = 0,
@@ -37,8 +37,8 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 1.1, delay, ease }}
     >
@@ -208,7 +208,7 @@ export function PinnedZoom({
 
   return (
     <section ref={ref} className="relative h-[240vh]">
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-[100svh] overflow-hidden">
         <motion.div className="absolute inset-0" style={{ clipPath: clip }} aria-label={alt}>
           <motion.div className="absolute inset-0" style={{ scale: imgScale }}>
             {image}
@@ -247,7 +247,7 @@ export function PinnedHorizontal({
   const trackRef = useRef<HTMLDivElement | null>(null);
   const prefersReduced = useReducedMotion();
   const distance = useMotionValue(0);
-  const [height, setHeight] = useState<number | null>(null);
+  const [travel, setTravel] = useState<number | null>(null);
   // Landscape phones are too short to pin a gallery: use a swipeable row instead.
   const [short, setShort] = useState(false);
   useEffect(() => {
@@ -263,10 +263,18 @@ export function PinnedHorizontal({
     if (reduceMotion) return;
     const track = trackRef.current;
     if (!track) return;
+    let lastWidth = -1;
+    let lastTrack = -1;
     const measure = () => {
-      const d = Math.max(0, track.scrollWidth - window.innerWidth);
+      const w = document.documentElement.clientWidth;
+      const tw = track.scrollWidth;
+      // Phones fire resize when the address bar slides; ignore height-only changes.
+      if (w === lastWidth && tw === lastTrack) return;
+      lastWidth = w;
+      lastTrack = tw;
+      const d = Math.max(0, tw - w);
       distance.set(d);
-      setHeight(d + window.innerHeight);
+      setTravel(d);
     };
     measure();
     const ro = new ResizeObserver(measure);
@@ -312,7 +320,7 @@ export function PinnedHorizontal({
       id={id}
       ref={sectionRef}
       className="relative"
-      style={{ height: height ?? "200vh" }}
+      style={{ height: travel === null ? "200svh" : `calc(${travel}px + 100svh)` }}
     >
       <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden pb-4 pt-16">
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">{header}</div>

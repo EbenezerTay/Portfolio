@@ -1,0 +1,11 @@
+// @types/react 19 moved JSX under the React namespace; register
+// react-three-fiber's elements (<mesh>, <group>, ...) there too.
+import type { ThreeElements } from "@react-three/fiber";
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements extends ThreeElements {}
+  }
+}

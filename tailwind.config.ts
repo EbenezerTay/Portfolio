@@ -8,53 +8,54 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: [
+          "var(--font-mono)",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Consolas",
+          "monospace",
+        ],
+      },
       colors: {
-        "ai-bg": "#020617",
-        "ai-surface": "rgba(15,23,42,0.85)",
-        "ai-border": "rgba(148,163,184,0.35)",
-        "ai-accent": "#4f46e5",
-        "ai-accent-soft": "#22d3ee",
+        // Editor-style palette. Token names kept so every page picks up the theme.
+        "ai-bg": "#0a0d12",
+        "ai-surface": "#10151c",
+        "ai-panel": "#0d1117",
+        "ai-border": "#222b36",
+        "ai-accent": "#059669",
+        "ai-accent-soft": "#34d399",
+        "ai-muted": "#7d8590",
+        // Syntax colours
+        "syn-kw": "#c792ea",
+        "syn-fn": "#82aaff",
+        "syn-str": "#ecc48d",
+        "syn-num": "#f78c6c",
+        "syn-prop": "#7fdbca",
+        "syn-com": "#5c6773",
       },
       borderRadius: {
-        xl: "1rem",
-        "2xl": "1.5rem",
+        xl: "0.625rem",
+        "2xl": "0.75rem",
+        "3xl": "0.875rem",
       },
       boxShadow: {
-        "ai-soft": "0 0 40px rgba(56,189,248,0.15)",
-        "ai-strong": "0 0 80px rgba(129,140,248,0.35)",
+        "ai-soft": "0 1px 0 rgba(255,255,255,0.03) inset, 0 12px 32px -16px rgba(0,0,0,0.6)",
+        "ai-strong": "0 24px 64px -24px rgba(0,0,0,0.8)",
       },
       backgroundImage: {
-        "ai-glass":
-          "linear-gradient(135deg, rgba(15,23,42,0.9), rgba(15,23,42,0.7))",
-        "ai-gradient":
-          "radial-gradient(circle at 0% 0%, rgba(56,189,248,0.2), transparent 55%), radial-gradient(circle at 100% 0%, rgba(129,140,248,0.2), transparent 55%), radial-gradient(circle at 50% 100%, rgba(56,189,248,0.18), transparent 50%)",
-      },
-      animation: {
-        "float-slow": "float 14s ease-in-out infinite",
-        "float-medium": "float 10s ease-in-out infinite",
-        "pulse-soft": "pulseSoft 6s ease-in-out infinite",
-        "particle-orbit": "particleOrbit 18s linear infinite",
-        "gradient-move": "gradientMove 22s ease-in-out infinite",
+        "ai-glass": "linear-gradient(180deg, #121821, #0f141b)",
       },
       keyframes: {
-        float: {
-          "0%, 100%": { transform: "translate3d(0, 0, 0)" },
-          "50%": { transform: "translate3d(0, -12px, 0)" },
+        blink: {
+          "0%, 49%": { opacity: "1" },
+          "50%, 100%": { opacity: "0" },
         },
-        pulseSoft: {
-          "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
-          "50%": { opacity: "0.9", transform: "scale(1.04)" },
-        },
-        particleOrbit: {
-          "0%": { transform: "rotate(0deg) translateX(12px) rotate(0deg)" },
-          "100%": {
-            transform: "rotate(360deg) translateX(12px) rotate(-360deg)",
-          },
-        },
-        gradientMove: {
-          "0%, 100%": { transform: "translate3d(0,0,0)" },
-          "50%": { transform: "translate3d(-30px, 20px, 0)" },
-        },
+      },
+      animation: {
+        blink: "blink 1.1s step-end infinite",
       },
     },
   },

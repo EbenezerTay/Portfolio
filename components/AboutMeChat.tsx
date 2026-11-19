@@ -141,8 +141,8 @@ export function AboutMeChat() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-ai-accent-soft">
-          Ask about me
+        <p className="mb-2 font-mono text-xs text-ai-accent-soft">
+          &gt;_ ask_ai
         </p>
         <h1 className="mb-3 text-2xl font-semibold tracking-tight text-slate-50 sm:text-3xl lg:text-4xl">
           Chat with an AI that only talks about my work
@@ -153,15 +153,13 @@ export function AboutMeChat() {
       </motion.div>
 
       <motion.div
-        className="relative flex min-h-[55vh] flex-col gap-5 rounded-3xl border border-ai-border/70 bg-ai-surface/85 p-6 shadow-[0_0_0_1px_rgba(34,211,238,0.2),0_0_40px_rgba(34,211,238,0.1)] sm:p-8"
+        className="relative flex min-h-[55vh] flex-col gap-5 rounded-2xl border border-ai-border p-6 bg-ai-panel shadow-ai-strong sm:p-8"
         initial={{ opacity: 0, scale: 0.98, y: 8 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-ai-accent-soft/25 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-12 -left-12 h-32 w-32 rounded-full bg-ai-accent/15 blur-3xl" />
 
-        <div className="relative flex max-h-[50vh] min-h-[280px] flex-1 flex-col gap-3 overflow-y-auto pr-2 text-[0.9rem] sm:min-h-[320px] sm:text-base">
+        <div data-lenis-prevent className="relative flex max-h-[50vh] min-h-[280px] flex-1 flex-col gap-3 overflow-y-auto pr-2 text-[0.9rem] sm:min-h-[320px] sm:text-base">
           {messages.length === 0 && (
             <div className="rounded-2xl border border-dashed border-ai-border/60 bg-black/30 px-4 py-3 text-slate-300/90 sm:px-5 sm:py-4">
               Try: &quot;What is SnapRent?&quot; or &quot;What trips have you been on?&quot; — or use the mic to speak.
@@ -193,7 +191,7 @@ export function AboutMeChat() {
         <form onSubmit={handleSubmit} className="relative flex items-center gap-3 pt-2">
           <div className="relative flex flex-1 items-center gap-2">
             <input
-              className="h-12 w-full rounded-2xl border border-ai-border/60 bg-black/40 pl-4 pr-12 text-[0.9rem] text-slate-100 outline-none placeholder:text-slate-500 focus:border-ai-accent-soft/80 focus:ring-2 focus:ring-ai-accent-soft/40 sm:h-14 sm:text-base"
+              className="h-12 w-full rounded-2xl border border-ai-border/60 bg-ai-bg pl-4 font-mono pr-12 text-[0.9rem] text-slate-100 outline-none placeholder:text-slate-500 focus:border-ai-accent-soft/80 focus:ring-2 focus:ring-ai-accent-soft/40 sm:h-14 sm:text-base"
               placeholder="Ask something about my work... or use the mic"
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -229,7 +227,7 @@ export function AboutMeChat() {
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="inline-flex h-12 w-24 items-center justify-center rounded-2xl bg-ai-accent-soft px-4 text-[0.9rem] font-medium text-slate-950 shadow-ai-soft transition disabled:cursor-not-allowed disabled:opacity-60 hover:bg-ai-accent hover:shadow-[0_0_24px_rgba(34,211,238,0.4)] sm:h-14 sm:w-28 sm:text-base"
+            className="inline-flex h-12 w-24 items-center justify-center rounded-2xl bg-ai-accent-soft px-4 text-[0.9rem] font-medium text-slate-950 shadow-ai-soft transition disabled:cursor-not-allowed disabled:opacity-60 hover:bg-emerald-300 sm:h-14 sm:w-28 sm:text-base"
           >
             {isLoading ? "..." : "Ask"}
           </button>

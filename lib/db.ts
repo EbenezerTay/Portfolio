@@ -1,7 +1,24 @@
-import { neon } from "@neondatabase/serverless";
+import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 
-const databaseUrl = process.env.DATABASE_URL ?? "";
-export const sql = neon(databaseUrl);
+type Sql = NeonQueryFunction<false, false>;
+
+let client: Sql | null = null;
+
+function getClient(): Sql {
+  if (!client) {
+    const databaseUrl = process.env.DATABASE_URL;
+    if (!databaseUrl) throw new Error("DATABASE_URL is not set");
+    client = neon(databaseUrl);
+  }
+  return client;
+}
+
+/**
+ * Tagged-template SQL client, created on first query rather than at import,
+ * so `next build` (and preview deployments without DATABASE_URL) don't crash.
+ */
+export const sql = ((strings: TemplateStringsArray, ...values: unknown[]) =>
+  getClient()(strings, ...values)) as Sql;
 
 export type Folder = {
   id: string;

@@ -12,16 +12,24 @@ html,
 body {
   padding: 0;
   margin: 0;
-  scroll-behavior: smooth;
+}
+
+html {
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background-color: #020617;
-  color: white;
+  background-color: #0a0d12;
+  color: #e6edf3;
+}
+
+::selection {
+  background: rgba(52, 211, 153, 0.3);
 }
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -29,8 +37,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.5);
+  background: #222b36;
   border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2f3a47;
 }
 
 .ai-no-select {
@@ -39,18 +51,20 @@ body {
 
 .ai-glass {
   background-image: theme("backgroundImage.ai-glass");
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
   border: 1px solid theme("colors.ai-border");
-}
-
-.ai-grid-mask {
-  mask-image: radial-gradient(circle at center, black, transparent 70%);
-  -webkit-mask-image: radial-gradient(circle at center, black, transparent 70%);
 }
 
 @media (pointer: coarse) {
   .ai-hide-on-touch {
     display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-blink {
+    animation: none;
   }
 }
